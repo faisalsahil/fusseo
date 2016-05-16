@@ -1,44 +1,105 @@
-<% content_for :title, 'admin | Action Cable Chat' %>
-<div class="header">
+Home#Page
+<%# content_for :title, 'admin | Action Cable Chat' %>
+<!-- <div class="header">
   <div class="team-menu">ActionCable</div>
 
   <div class="channel-menu">
-    <span class="channel-menu_name"><span class="channel-menu_prefix">#</span> admin</span>
+    <span class="channel-menu_name"><span class="channel-menu_prefix">#</span> Chat</span>
   </div>
 </div>
 <div class="main">
   <div class="listings">
     <div class="listings_channels">
       <h2 class="listings_header">Channels</h2>
-      <ul class="channel_list">
-        <li class="channel active">
-          <a class="channel_name"><span><span class="prefix">#</span>admin</span></a>
-        </li>
-        <li class="channel">
-          <a class="channel_name"><span class="unread">10</span><span><span class="prefix">#</span>general</span></a>
-        </li>
-      </ul>
+
     </div>
     <div class="listings_direct-messages">
-      <h2 class="listings_header">Direct Messages</h2>
+
       <ul class="channel_list">
-        <li class="channel">
-          <a class="channel_name"><span class="unread">20</span><span><span class="prefix"> </span>dhh@basecamp.com</span></a>
-        </li>
+
       </ul>
     </div>
   </div>
   <div class="message-history" id="messages">
-    <%= render @messages %>
+    <%#= render @messages %>
   </div>
 </div>
 <div class="footer">
   <div class="user-menu">
-    <span class="user-menu_profile-pic"></span><span class="user-menu_username"><%= current_user.email %></span>
+    <span class="user-menu_profile-pic"></span><span class="user-menu_username"><%#= current_user.email %></span>
     <span class="connection_status">online</span>
-    <span class="logout"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></span>
+    <span class="logout"><%#= link_to('Logout', destroy_user_session_path, :method => :delete) %></span>
   </div>
   <div class="input-box">
     <input type="text" class="input-box_text" id="message_input"/>
   </div>
+</div> -->
+
+<div class="input-box">
+  <input type="text" id="message_input" placeholder="Email"/>
+  <input type="text" id="password_input" placeholder="Password"/>
+  <input type="button" id="submit-button" value="Submit"/>
 </div>
+
+
+<!--<!DOCTYPE HTML>-->
+<html>
+  <head>
+    <script type="text/javascript">
+       function WebSocketTest()
+       {
+          // var WebSocket = require('ws');
+          if ("WebSocket" in window)
+          {
+             alert("WebSocket is supported by your Browser!");
+
+             // Let us open a web socket
+             var ws = new WebSocket("ws://localhost:3000/cable");
+
+             ws.onopen = function(data)
+             {
+                // Web Socket is connected, send data using send()
+                var i = JSON.stringify({ 'command': 'subscribe', 'identifier': {'channel':'ProfileChannel', 'email': 'faisal@gmail.com', 'password': 'zaqxsw1234'}});
+                var response = ws.send(i);
+
+                // console.log("Response",response)
+
+                // alert("Message is sent...");
+             };
+
+             ws.onmessage = function (evt)
+             {
+                var received_msg = evt.data;
+                // alert("Message is received...");
+                console.log("Rcvd",received_msg)
+             };
+
+             ws.onclose = function()
+             {
+                // websocket is closed.
+                alert("Connection is closed...");
+             };
+          }
+
+          else
+          {
+             // The browser doesn't support WebSocket
+             alert("WebSocket NOT supported by your Browser!");
+          }
+       }
+
+       $(document).ready(function(){
+        $("#edit-button").click(function(){
+          App.profile.edit({'email': 'faisal@gmail.com', 'token': '15efb0fe-1aec-43e7-a01c-b9720f370777'})
+        })
+       })
+    </script>
+  </head>
+  <body>
+    <div id="sse">
+      <a href="javascript:WebSocketTest()">Run WebSocket</a>
+
+      <!-- <input type="button" id="edit-button"  value="Edit Function"/> -->
+    </div>
+  </body>
+</html>

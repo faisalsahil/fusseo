@@ -1,8 +1,12 @@
 class BroadcastMessageJob < ApplicationJob
   queue_as :default
 
-  def perform(message)
-    ActionCable.server.broadcast 'room_channel', render_message(message)
+  def perform(channel_stream,data)
+  	puts "mm"*90
+  	puts channel
+  	puts data
+  	id = 12345
+    ActionCable.server.broadcast channel_stream, data
   end
 
   private

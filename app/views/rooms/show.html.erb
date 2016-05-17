@@ -59,7 +59,7 @@ Home#Page
              ws.onopen = function(data)
              {
                 // Web Socket is connected, send data using send()
-                var i = JSON.stringify({ 'command': 'subscribe', 'identifier': {'channel':'ProfileChannel', 'email': 'faisal@gmail.com', 'password': 'zaqxsw1234'}});
+                var i = JSON.stringify({ "command": "subscribe", "identifier": {"channel":"ProfileChannel", "email": "faisal@gmail.com", "password": "zaqxsw1234"}});
                 var response = ws.send(i);
 
                 // console.log("Response",response)

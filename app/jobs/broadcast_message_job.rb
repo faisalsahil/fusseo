@@ -5,6 +5,8 @@ class BroadcastMessageJob < ApplicationJob
   	puts "mm"*90
   	puts channel
   	puts data
+    user = data
+    post = user.posts
   	id = 12345
     ActionCable.server.broadcast channel_stream, data
   end

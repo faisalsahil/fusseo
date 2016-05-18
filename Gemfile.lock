@@ -211,6 +211,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionmailer
   bcrypt
   byebug
   coffee-rails (~> 4.1.0)

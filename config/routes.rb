@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   root to: 'rooms#show'
   # match "/websocket", :to => ActionCable.server, via: [:get, :post]
   match '(:anything)' => 'application#nothing', via: [:options]
-
+  resources :users, only: [] do
+    collection do
+      get 'activation'
+    end
+ end
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       devise_for :users
